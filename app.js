@@ -1,6 +1,13 @@
+// dotenv
+require('dotenv').config();
+
+// cookieParser
+const cookieParser = require('cookie-parser');
+
 // express ----------------------------------
 const express = require('express');
 const app = express();
+app.use(cookieParser());
 
 // handlebars ----------------------------------
 const { engine } = require('express-handlebars');
@@ -44,6 +51,7 @@ app.use(methodOverride('_method'));
 // refactored into controllers
 const posts = require('./controllers/posts')(app);
 const comments = require('./controllers/comments.js')(app);
+require('./controllers/auth.js')(app);
 
 // server ----------------------------------
 app.listen(3000, () => {
