@@ -10,6 +10,8 @@ mongoose
   })
   .then(() => {
     console.log('Connected successfully to database');
+    // turn on for testing
+    // db.close();
   })
   .catch((error) => {
     console.error('Error connecting to database:', error);

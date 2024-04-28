@@ -44,10 +44,6 @@ app.use(methodOverride('_method'));
 // refactored into controllers
 const posts = require('./controllers/posts')(app);
 
-app.get('/', (req, res) => {
-  res.render('home');
-});
-
 // server ----------------------------------
 app.listen(3000, () => {
   console.log('App listening on port 3000!');
