@@ -43,6 +43,7 @@ app.use(methodOverride('_method'));
 // routes ----------------------------------
 // refactored into controllers
 const posts = require('./controllers/posts')(app);
+const comments = require('./controllers/comments.js')(app);
 
 // server ----------------------------------
 app.listen(3000, () => {
