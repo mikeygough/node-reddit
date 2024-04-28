@@ -11,6 +11,11 @@ module.exports = (app) => {
       });
   });
 
+  // NEW
+  app.get('/posts/new', (req, res) => {
+    res.render('posts-new');
+  });
+
   // SHOW
   app.get('/posts/:id', (req, res) => {
     Post.findById(req.params.id)
@@ -19,11 +24,6 @@ module.exports = (app) => {
       .catch((err) => {
         console.log(err.message);
       });
-  });
-
-  // NEW
-  app.get('/posts/new', (req, res) => {
-    res.render('posts-new');
   });
 
   // CREATE
@@ -39,5 +39,15 @@ module.exports = (app) => {
       // handle error appropriately
       res.status(500).send('Error saving post');
     }
+  });
+
+  // SUBREDDIT SHOW
+  app.get('/n/:subreddit', (req, res) => {
+    Post.find({ subreddit: req.params.subreddit })
+      .lean()
+      .then((posts) => res.render('posts-index', { posts }))
+      .catch((err) => {
+        console.log(err);
+      });
   });
 };
