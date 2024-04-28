@@ -4,10 +4,14 @@ require('dotenv').config();
 // cookieParser
 const cookieParser = require('cookie-parser');
 
+// custom middleware
+const checkAuth = require('./middleware/checkAuth');
+
 // express ----------------------------------
 const express = require('express');
 const app = express();
 app.use(cookieParser());
+app.use(checkAuth);
 
 // handlebars ----------------------------------
 const { engine } = require('express-handlebars');

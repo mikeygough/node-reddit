@@ -3,9 +3,12 @@ const Post = require('../models/post');
 module.exports = (app) => {
   // INDEX
   app.get('/', (req, res) => {
+    const currentUser = req.user;
+
     Post.find({})
-      .lean()
-      .then((posts) => res.render('posts-index', { posts }))
+      .then((posts) =>
+        res.render('posts-index', { posts, currentUser })
+      )
       .catch((err) => {
         console.log(err.message);
       });
@@ -28,17 +31,13 @@ module.exports = (app) => {
   });
 
   // CREATE
-  app.post('/posts/new', async (req, res) => {
-    try {
-      // create post
+  app.post('/posts/new', (req, res) => {
+    if (req.user) {
       const post = new Post(req.body);
-      // save post
-      await post.save();
-      res.redirect('/');
-    } catch (error) {
-      console.error('Error saving post:', error);
-      // handle error appropriately
-      res.status(500).send('Error saving post');
+
+      post.save(() => res.redirect('/'));
+    } else {
+      return res.status(401); // UNAUTHORIZED
     }
   });
 
