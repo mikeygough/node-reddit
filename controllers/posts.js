@@ -23,13 +23,13 @@ module.exports = (app) => {
 
   // SHOW
   app.get('/posts/:id', (req, res) => {
-    const currentUser = req.user;
+    const user = req.user;
 
     Post.findById(req.params.id)
       .lean()
-      .populate('comments')
+      .populate({ path: 'comments', populate: { path: 'author' } })
       .populate('author')
-      .then((post) => res.render('posts-show', { post, currentUser }))
+      .then((post) => res.render('posts-show', { post, user }))
       .catch((err) => {
         console.log(err.message);
       });

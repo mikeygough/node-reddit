@@ -22,7 +22,7 @@ module.exports = (app) => {
           console.log(err);
         });
     } else {
-      return rest.status(401); // UNAUTHORIZED
+      return res.status(401); // UNAUTHORIZED
     }
   });
 };
