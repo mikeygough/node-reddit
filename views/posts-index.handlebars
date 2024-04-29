@@ -14,6 +14,14 @@
             <a href='/n/{{this.subreddit}}'>{{this.subreddit}}</a>
           </div>
           <div><small>{{this.author.username}}</small></div>
+
+          <form class='vote-up' data-id='{{this._id}}'>
+            <button type='submit'>Vote Up</button>
+          </form>
+
+          <form class='vote-down' data-id='{{this._id}}'>
+            <button type='submit'>Vote Down</button>
+          </form>
         </li>
       {{/each}}
     </ul>
