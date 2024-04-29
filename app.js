@@ -53,9 +53,10 @@ app.use(methodOverride('_method'));
 
 // routes ----------------------------------
 // refactored into controllers
-const posts = require('./controllers/posts')(app);
-const comments = require('./controllers/comments.js')(app);
+require('./controllers/posts')(app);
+require('./controllers/comments.js')(app);
 require('./controllers/auth.js')(app);
+require('./controllers/replies.js')(app);
 
 // server ----------------------------------
 app.listen(3000, () => {
